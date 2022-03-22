@@ -1,6 +1,8 @@
 import { Form } from "remix";
 import { SocialsProvider } from "remix-auth-socials";
 
+import { authenticator } from "../services/auth.server.js";
+
 const CONTAINER_STYLES = {
   width: "100%",
   height: "100vh",
@@ -17,6 +19,13 @@ const BUTTON_STYLES = {
   cursor: "pointer",
   color: "white",
   fontWeight: "bold",
+};
+
+export const loader = async ({ request }) => {
+  await authenticator.isAuthenticated(request, {
+    successRedirect: "/dashboard",
+    failureRedirect: "/",
+  });
 };
 
 const IndexPage = () => {
