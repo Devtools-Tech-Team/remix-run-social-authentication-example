@@ -24,8 +24,9 @@ const BUTTON_STYLES = {
 export const loader = async ({ request }) => {
   await authenticator.isAuthenticated(request, {
     successRedirect: "/dashboard",
-    failureRedirect: "/",
   });
+
+  return null;
 };
 
 const IndexPage = () => {
